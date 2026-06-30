@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redrob — Trophy Wall prototype</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.35.0/tabler-icons.min.css">
+<style>
+:root{
+  --bg:#ffffff;
+  --surface-1:#f7f7f5;
+  --text-primary:#16161a;
+  --text-secondary:#5f5f5a;
+  --text-muted:#9c9a92;
+  --border:#e7e5de;
+  --border-strong:#d3d1c7;
+  --accent-bg:#e6f1fb;
+  --accent-text:#0c447c;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--surface-1);color:var(--text-primary);display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
+.app{display:flex;width:100%;max-width:960px;height:600px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--bg);box-shadow:0 1px 3px rgba(0,0,0,0.04);}
+.sidebar{width:230px;flex-shrink:0;background:var(--bg);border-right:1px solid var(--border);padding:18px 12px;display:flex;flex-direction:column;}
+.logo{display:flex;align-items:center;gap:8px;font-weight:600;font-size:17px;padding:4px 8px 16px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text-secondary);transition:background .15s;}
+.nav-item:hover{background:var(--surface-1);}
+.nav-item.active{background:var(--accent-bg);color:var(--accent-text);font-weight:500;}
+.new-chat{border:1px solid var(--border-strong);margin-bottom:10px;}
+.divider{height:1px;background:var(--border);margin:8px 6px;}
+.badge-new{font-size:10px;background:var(--accent-bg);color:var(--accent-text);padding:2px 6px;border-radius:6px;}
+.recents-label{margin-top:16px;font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;padding:0 6px;}
+.recent-item{font-size:12px;color:var(--text-muted);padding:6px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.user-block{margin-top:auto;display:flex;align-items:center;gap:10px;padding:12px 6px 0;border-top:1px solid var(--border);}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--text-primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;}
+.main{flex:1;padding:28px;overflow:auto;}
+.period-btn{border:1px solid var(--border-strong);background:transparent;font-size:12px;padding:6px 14px;border-radius:8px;cursor:pointer;color:var(--text-secondary);}
+.period-btn.active{background:var(--text-primary);color:#fff;border-color:var(--text-primary);}
+.share-btn{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:5px 9px;border:1px solid var(--border-strong);border-radius:8px;background:transparent;color:var(--text-secondary);cursor:pointer;}
+.share-btn:hover{background:var(--surface-1);}
+.badge-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px;}
+.tag-pill{background:var(--accent-bg);color:var(--accent-text);font-size:11px;padding:5px 11px;border-radius:999px;}
+.chip{border:1px solid var(--border-strong);border-radius:999px;padding:7px 14px;font-size:12px;color:var(--text-secondary);}
+@media (max-width:640px){
+  .app{flex-direction:column;height:auto;max-width:100%;}
+  .sidebar{width:100%;border-right:none;border-bottom:1px solid var(--border);}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="sidebar">
+    <div class="logo"><i class="ti ti-cube" style="font-size:18px;"></i>redrob</div>
+    <div class="nav-item new-chat active" onclick="showHome(this)"><i class="ti ti-plus"></i>New chat</div>
+    <div class="nav-item" onclick="showHome(this)"><i class="ti ti-message-circle"></i>All chats</div>
+    <div class="nav-item" onclick="showHome(this)"><i class="ti ti-layout-grid"></i>AI app store</div>
+    <div class="nav-item" onclick="showHome(this)"><i class="ti ti-folder"></i>Projects</div>
+    <div class="nav-item" onclick="showHome(this)"><i class="ti ti-users"></i>Chat rooms</div>
+    <div class="nav-item" onclick="showHome(this)"><i class="ti ti-user"></i>Contacts</div>
+    <div class="divider"></div>
+    <div class="nav-item" onclick="showTrophy(this)" style="justify-content:space-between;">
+      <span style="display:flex;align-items:center;gap:10px;"><i class="ti ti-trophy"></i>Trophy wall</span>
+      <span class="badge-new">new</span>
+    </div>
+    <div class="nav-item" onclick="showHome(this)"><i class="ti ti-id-badge-2"></i>Profile</div>
+    <div class="recents-label">Recents</div>
+    <div class="recent-item">Marketing strategy for produc...</div>
+    <div class="recent-item">Job search tool for APM roles</div>
+    <div class="recent-item">Redrob AI usage and job trac...</div>
+    <div class="user-block">
+      <div class="avatar">AP</div>
+      <div style="overflow:hidden;">
+        <div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Ashwina Pal</div>
+        <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Ashwina's workspace</div>
+      </div>
+    </div>
+  </div>
+  <div class="main" id="main-panel"></div>
+</div>
+<script>
+var state={period:'monthly'};
+var monthlyBadges=[
+{icon:'ti-trending-up',title:'Resume score jumped',desc:'61% to 88% match for product roles',tag:'This month'},
+{icon:'ti-message-2',title:'12 AI chats',desc:'Explored 3 new career directions',tag:'This month'},
+{icon:'ti-target',title:'5 mock interviews',desc:'Completed with AI feedback',tag:'This month'},
+{icon:'ti-send',title:'18 applications sent',desc:'Across 6 companies',tag:'This month'}
+];
+var yearlyBadges=[
+{icon:'ti-trophy',title:'Top 5% most active',desc:'Among Redrob users in 2026',tag:'2026 recap'},
+{icon:'ti-flame',title:'94 day streak',desc:'Longest consistency streak',tag:'2026 recap'},
+{icon:'ti-compass',title:'Found your direction',desc:'Most explored: product design',tag:'2026 recap'},
+{icon:'ti-briefcase',title:'3 offers received',desc:'From 142 applications',tag:'2026 recap'}
+];
+var interests=['Product design','EdTech','Data analytics','UI/UX'];
+function cardHTML(b){
+return '<div class="badge-card"><i class="ti '+b.icon+'" style="font-size:20px;color:var(--accent-text);"></i><div style="font-size:13px;font-weight:600;">'+b.title+'</div><div style="font-size:12px;color:var(--text-secondary);flex:1;">'+b.desc+'</div><div style="display:flex;align-items:center;justify-content:space-between;margin-top:2px;"><span style="font-size:10px;color:var(--text-muted);">'+b.tag+'</span><button class="share-btn" onclick="shareBadge(this)"><i class="ti ti-brand-linkedin"></i>Share</button></div></div>';
+}
+function badgeGridInner(){
+var data=state.period==='monthly'?monthlyBadges:yearlyBadges;
+return data.map(cardHTML).join('');
+}
+function homeHTML(){
+return '<div style="max-width:480px;margin:60px auto;text-align:center;"><h2 style="font-size:22px;font-weight:600;margin:0 0 6px;">Built <span style="font-style:italic;color:var(--text-secondary);font-weight:400;">around</span> you.</h2><p style="color:var(--text-secondary);font-size:13px;margin:0 0 22px;">AI tools for India\'s most ambitious</p><div style="border:1px solid var(--border);border-radius:10px;padding:12px 14px;text-align:left;color:var(--text-muted);font-size:13px;margin-bottom:16px;">Ask Redrob anything</div><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;"><span class="chip">People search</span><span class="chip">Company search</span><span class="chip">Job search</span><span class="chip">Resume ranker</span></div></div>';
+}
+function trophyHTML(){
+return '<div><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;flex-wrap:wrap;gap:10px;"><h2 style="font-size:18px;font-weight:600;margin:0;display:flex;align-items:center;gap:8px;"><i class="ti ti-trophy" style="font-size:19px;color:var(--accent-text);"></i>Trophy wall</h2><div style="display:flex;gap:6px;"><button class="period-btn active" data-period="monthly" onclick="setPeriod(\'monthly\')">Monthly</button><button class="period-btn" data-period="yearly" onclick="setPeriod(\'yearly\')">Yearly</button></div></div><p style="color:var(--text-secondary);font-size:12px;margin:0 0 18px;">Your everyday wins on Redrob, tracked automatically.</p><div id="badge-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">'+badgeGridInner()+'</div><div style="margin-top:22px;"><div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">What you keep coming back to</div><div style="display:flex;gap:6px;flex-wrap:wrap;">'+interests.map(function(i){return '<span class="tag-pill">'+i+'</span>';}).join('')+'</div></div></div>';
+}
+function setActive(el){document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});el.classList.add('active');}
+function showHome(el){setActive(el);document.getElementById('main-panel').innerHTML=homeHTML();}
+function showTrophy(el){setActive(el);state.period='monthly';document.getElementById('main-panel').innerHTML=trophyHTML();}
+function setPeriod(p){state.period=p;document.getElementById('badge-grid').innerHTML=badgeGridInner();document.querySelectorAll('.period-btn').forEach(function(b){b.classList.toggle('active',b.dataset.period===p);});}
+function shareBadge(btn){var orig=btn.innerHTML;btn.innerHTML='<i class="ti ti-check"></i>Shared';btn.disabled=true;setTimeout(function(){btn.innerHTML=orig;btn.disabled=false;},1600);}
+document.getElementById('main-panel').innerHTML=homeHTML();
+</script>
+</body>
+</html>
